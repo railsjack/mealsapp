@@ -84,3 +84,40 @@ gridItem: {
 	height: 150
 }
 ```
+
+## How to handle header Options
+This is based on the fact that each screen is just a javascript function and   
+it can have a property like as **navigationOptions**, so that we can inject   
+any custom options for the screen of the navigation.
+
+For example
+```
+const CategoriesScreen = props => {
+  return (
+	<View>
+	...
+	</View>
+  );
+};
+CategoriesScreen.navigationOptions = {
+	headerTitle: 'Custom title',
+	headerStyle: {
+		...
+	}
+}
+```
+Another way
+```
+CategoriesScreen.navigationOptions = navigationData => {
+	const title = navigationData.navigation.getParam('title);
+	return {
+		headerTitle: title
+	}
+}
+```
+
+## Using react-native-screens
+```
+import {useScreens} from 'react-native-screens';
+useScreens();
+```
