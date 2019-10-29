@@ -42,3 +42,45 @@ export default function App() {
 }
 
 ```
+
+## How to use FlatList
+models/category.js
+```
+class Category{
+	constructor(id, title, color) {
+		this.id = id;
+		this.title = title;
+		this.color = color;
+	}
+}
+export default Category;
+```
+
+data/dummy-data.js  
+```
+import Category from '../models/category';
+export const CATEGORIES = [
+	new Category('c1', 'Italian', '#f5428d'),
+	...
+];
+```
+
+```
+import {CATEGORIES} from '../data/dummy-data';
+
+const renderGridItem = itemData => {
+	return (
+		<View style={styles.gridItem}>
+			<Text>{itemData.item.title}</Text>
+		</View>
+	);
+}
+
+<FlatList keyExtractor={(item, index)=>item.id} data={CATEGORIES} renderItem={renderGridItem} numColumns{2} />
+
+gridItem: {
+	flex: 1,
+	margin: 15,
+	height: 150
+}
+```

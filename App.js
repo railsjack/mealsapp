@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 
-import MealsNavigator from "./navigation/MealsNavigator";
+import MealsNavigator from "./app/navigation/MealsNavigator";
 
 const fetchFonts = () => {
   return Font.loadAsync({
