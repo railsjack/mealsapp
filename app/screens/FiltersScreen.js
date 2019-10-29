@@ -10,7 +10,6 @@ const FilterSwitch = props => (
   <View style={styles.filterContainer}>
     <Text>{props.label}</Text>
     <Switch
-      style={styles.switch}
       value={props.state}
       onValueChange={props.onChange}
       trackColor={{ true: Colors.primaryColor }}
@@ -83,10 +82,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "80%"
-  },
-  switch: {
-    marginVertical: 10
+    width: "80%",
+    marginVertical: 7
   }
 });
 
