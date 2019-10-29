@@ -79,9 +79,14 @@ const MealsFavTabNavigator =
         }
       });
 
-  const FiltersNavigator = createStackNavigator({
+const FiltersNavigator = createStackNavigator(
+  {
     Filters: FiltersScreen
-  });
+  },
+  {
+    defaultNavigationOptions: defaultStackNavOptions
+  }
+);
 
 const MainNavigator = createDrawerNavigator({
   MealsFavs: MealsFavTabNavigator,
