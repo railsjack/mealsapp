@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   TouchableNativeFeedback,
+  ImageBackground,
   View
 } from "react-native";
 
@@ -16,13 +17,14 @@ const CategoryGridTile = props => {
   return (
     <View style={styles.gridItem}>
       <TouchableCmp style={{flex: 1}} onPress={props.onSelect}>
-        <View
+        <ImageBackground
+          source={props.imageUrl}
           style={{ ...styles.container, ...{ backgroundColor: props.color } }}
         >
           <Text style={styles.title} numberOfLines={2}>
             {props.title}
           </Text>
-        </View>
+        </ImageBackground>
       </TouchableCmp>
     </View>
   );
@@ -45,14 +47,17 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 10,
     elevation: 3,
-    padding: 15,
+    padding: 5,
     justifyContent: "flex-end",
     alignItems: "flex-end"
   },
   title: {
     fontFamily: "open-sans-bold",
-    fontSize: 20,
-    textAlign: "right"
+    fontSize: 16,
+    textAlign: "right",
+    backgroundColor: 'rgba(255,255,255, 0.7)',
+    borderRadius: 5,
+    padding: 5,
   }
 });
 

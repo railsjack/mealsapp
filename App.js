@@ -16,7 +16,9 @@ useScreens();
 const fetchFonts = () => {
   return Font.loadAsync({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
-    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf")
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+    "srisakdi": require("./assets/fonts/Srisakdi-Regular.ttf"),
+    "srisakdi-bold": require("./assets/fonts/Srisakdi-Bold.ttf"),
   });
 };
 

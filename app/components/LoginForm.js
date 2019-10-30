@@ -21,8 +21,8 @@ const LoginFormComponent = props => {
     },
     form: {
       email: {
-        value: "nahrae@gmail.com",
-        valid: true,
+        value: "",
+        valid: false,
         type: "textinput",
         rules: {
           isRequired: true,
@@ -30,16 +30,16 @@ const LoginFormComponent = props => {
         }
       },
       password: {
-        value: "nahrae@gmail.com",
-        valid: true,
+        value: "",
+        valid: false,
         type: "textinput",
         rules: {
           minLength: 6
         }
       },
       confirmPassword: {
-        value: "nahrae@gmail.com",
-        valid: true,
+        value: "",
+        valid: false,
         type: "textinput",
         rules: {
           confirmPass: "password"
@@ -120,7 +120,7 @@ const LoginFormComponent = props => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, props.overrideStyle]}>
       <Input
         placeholder="Enter your email"
         type={form.email.type}
@@ -168,7 +168,6 @@ const LoginFormComponent = props => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10
   },
   errorContainer: {
     marginBottom: 10,

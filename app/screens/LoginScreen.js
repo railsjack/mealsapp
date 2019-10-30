@@ -1,5 +1,10 @@
 import React, { Component, useState } from "react";
-import { ActivityIndicator, StyleSheet, ScrollView, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  ImageBackground,
+  View
+} from "react-native";
 import { connect, useDispatch } from "react-redux";
 
 import Logo from "../components/Logo";
@@ -51,10 +56,33 @@ class LoginScreen extends Component {
         <ActivityIndicator />
       </View>
     ) : (
-      <ScrollView style={styles.container}>
-        <Logo />
-        <LoginForm navigation={this.props.navigation} User={this.props.User} />
-      </ScrollView>
+      <ImageBackground
+        resizeMode="cover"
+        source={require("../../assets/images/food-bg.jpg")}
+        style={styles.container}
+      >
+        <View style={{ 
+          width: '100%',
+          padding: 20,
+          marginTop: 100,
+          borderRadius: 15,
+          shadowColor: "black",
+          shadowOpacity: 0.26,
+          shadowOffset: { width: 0, height: 1 },
+          shadowRadius: 5,
+          elevation: 1,
+          backgroundColor: "rgba(255,255,255,0.4)" }}>
+          <Logo
+            overrideStyle={{
+              marginBottom: 50
+            }}
+          />
+          <LoginForm
+            navigation={this.props.navigation}
+            User={this.props.User}
+          />
+        </View>
+      </ImageBackground>
     );
   }
 }
@@ -62,8 +90,7 @@ class LoginScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 40,
-    marginTop: 50
+    padding: 20
   },
   loading: {
     flex: 1,

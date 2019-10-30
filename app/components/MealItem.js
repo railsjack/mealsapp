@@ -43,7 +43,13 @@ const styles = StyleSheet.create({
     width: "100%",
 		backgroundColor: "#f5f5f5",
 		borderRadius: 10,
-		overflow: 'hidden'
+    overflow: 'hidden',
+    marginBottom: 15,
+    shadowColor: "black",
+    shadowOpacity: 0.26,
+    shadowOffset: { width: 0, height: 1 },
+    shadowRadius: 10,
+    elevation: 3,
   },
   bgImage: {
     width: "100%",

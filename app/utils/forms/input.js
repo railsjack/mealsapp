@@ -7,6 +7,7 @@ const Input = props => {
     case "textinput":
       template = (
         <TextInput
+          placeholderTextColor="#222"
           underlineColorAndroid="transparent"
           {...props}
           style={[styles.input, props.overrideStyle]}
@@ -22,12 +23,15 @@ const Input = props => {
 const styles = StyleSheet.create({
   input: {
     width: "100%",
-    fontFamily: "open-sans",
-    fontSize: 16,
+    fontFamily: "open-sans-bold",
+    fontSize: 20,
+    letterSpacing: 1,
     padding: 5,
     marginTop: 10,
-    borderBottomColor: "#eaeaea",
-    borderBottomWidth: 1
+    borderBottomColor: 'rgba(128,128,128,0.4)',
+    borderBottomWidth: 1,
+    borderRadius: 4,
+    backgroundColor: 'rgba(196,196,196,0.1)'
   }
 });
 
