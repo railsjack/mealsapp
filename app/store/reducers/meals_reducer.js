@@ -1,3 +1,34 @@
-export default (state = {}, action) => {
-	return state;
+import { TOGGLE_FAVORITE } from "../types";
+
+import { MEALS } from "../../data/dummy-data";
+
+const initialState = {
+  meals: MEALS,
+  filteredMeals: MEALS,
+  favoriteMeals: []
+};
+
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case TOGGLE_FAVORITE:
+      const existingIndex = state.favoriteMeals.findIndex(
+        meal => meal.id === action.mealId
+			);
+      if (existingIndex >= 0) {
+        const updatedFavMeals = [...state.favoriteMeals];
+        updatedFavMeals.splice(existingIndex, 1);
+        return {
+          ...state,
+          favoriteMeals: updatedFavMeals
+        };
+      } else {
+        const meal = MEALS.find(meal => meal.id === action.mealId);
+        return {
+          ...state,
+          favoriteMeals: state.favoriteMeals.concat(meal)
+        };
+      }
+    default:
+      return state;
+  }
 };

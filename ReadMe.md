@@ -124,9 +124,9 @@ useScreens();
 
 ## How to put an Icon button in the right of the header
 ```
-Header Icon Component
-
+// Header Icon Component
 components/HeaderButton.js
+
 import React from 'react';
 import { HeaderButton } from 'react-navigation-header-buttons';
 import { Ionicons } from '@expo/vector-icons';
@@ -142,6 +142,9 @@ const CustomHeaderButton = props => {
 }
 export default CustomHeaderButton;
 
+
+// When using...
+
 import { HeaderButtons } from 'react-navigation-header-buttons';
 import HeaderButton from 'components/HeaderButton';
 
@@ -149,7 +152,48 @@ import HeaderButton from 'components/HeaderButton';
 	<Item title='Favorite' iconName='ios-star' onPress={()=>{}} />
 </HeaderButtons>
 
-When using...
 
+```
+
+## How to use useSelector and useDispatch
+```
+// useSelector
+import {useSelector} from 'react-redux';
+const availableMeals = useSelector(state => state.meals.filteredMeals)
+
+// useDispatch
+import {useDispatcher} from 'react-redux';
+const dispatch = useDispatch();
+dispatch(actionMethod1())
+```
+
+## How to use useEffect and useCallback
+> *First of all, we use these in order to communicate between a Compoenent and  
+another Component or function.  
+Especially, it is very useful when we need to handle some processes in the following case.  
+navigationOptions = ()=>{  
+	...  
+}*
+
+```
+const dispatch = useDispatch();
+const toggleFavoriteHandler = useCallback(() => {
+	dispatch(toggleFavorite(mealId));
+}, [dispatch, mealId]);
+
+useEffect(()=>{
+	props.navigation.setParams({toggleFav: toggleHandler})
+}, [toggleFavoriteHandler])
+
+
+MealDetailScreen.navigationOptions = navigationData => {
+	const toggleFavorite = navigationData.navigation.getParam('toggleFav')
+	return {
+		headerRight: 
+			<HeaderButtons>
+				<Item onPress={toggleFavorite} />
+			</HeaderButtons>
+	}
+}
 
 ```
