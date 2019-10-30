@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Platform } from "react-native";
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createDrawerNavigator } from "react-navigation-drawer";
@@ -14,6 +14,7 @@ import CategoryMealsScreen from "../screens/CategoryMealsScreen";
 import MealDetailScreen from "../screens/MealDetailScreen";
 import FavoritesScreen from "../screens/FavoritesScreen";
 import FiltersScreen from "../screens/FiltersScreen";
+import LoginScreen from "../screens/LoginScreen";
 
 import Colors from "../constants/colors";
 
@@ -22,10 +23,10 @@ const defaultStackNavOptions = {
     backgroundColor: Colors.primaryColor
   },
   headerTitleStyle: {
-    fontFamily: 'open-sans-bold'
+    fontFamily: "open-sans-bold"
   },
   headerBackTitleStyle: {
-    fontFamily: 'open-sans'
+    fontFamily: "open-sans"
   },
   headerTintColor: "white"
 };
@@ -79,8 +80,8 @@ const MealsFavTabNavigator =
       })
     : createBottomTabNavigator(screenConfig, {
         tabBarOptions: {
-          labelStyle:{
-            fontFamily: 'open-sans'
+          labelStyle: {
+            fontFamily: "open-sans"
           },
           activeTintColor: Colors.accentColor
         }
@@ -95,21 +96,34 @@ const FiltersNavigator = createStackNavigator(
   }
 );
 
-const MainNavigator = createDrawerNavigator({
-  MealsFavs: {
-    screen: MealsFavTabNavigator,
-    navigationOptions: {
-      drawerLabel: 'Meals'
-    }
+const MainNavigator = createDrawerNavigator(
+  {
+    MealsFavs: {
+      screen: MealsFavTabNavigator,
+      navigationOptions: {
+        drawerLabel: "Meals"
+      }
+    },
+    Filters: FiltersNavigator
   },
-  Filters: FiltersNavigator
-}, {
-  contentOptions: {
-    activeTintColor: Colors.accentColor,
-    labelStyle: {
-      fontFamily: 'open-sans-bold'
+  {
+    contentOptions: {
+      activeTintColor: Colors.accentColor,
+      labelStyle: {
+        fontFamily: "open-sans-bold"
+      }
     }
   }
-});
+);
 
-export default createAppContainer(MainNavigator);
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      Auth: LoginScreen,
+      Main: MainNavigator
+    },
+    {
+      initialRouteName: "Auth"
+    }
+  )
+);

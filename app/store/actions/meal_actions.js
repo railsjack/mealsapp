@@ -8,7 +8,6 @@ export const toggleFavorite = mealId => {
 };
 
 export const setFilters = (filters) => {
-	console.log('setFilters', filters)
   return {
     type: SET_FILTERS,
     filters: filters

@@ -1,2 +1,4 @@
-export const TOGGLE_FAVORITE = 'toggle_favorite';
-export const SET_FILTERS = 'set_filters'
+export const TOGGLE_FAVORITE = "toggle_favorite";
+export const SET_FILTERS = "set_filters";
+export const SIGN_UP = "sign_up";
+export const SIGN_IN = "sign_in";
