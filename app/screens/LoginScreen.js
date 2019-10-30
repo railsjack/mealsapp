@@ -74,7 +74,7 @@ class LoginScreen extends Component {
           backgroundColor: "rgba(255,255,255,0.4)" }}>
           <Logo
             overrideStyle={{
-              marginBottom: 50
+              marginBottom: 0
             }}
           />
           <LoginForm

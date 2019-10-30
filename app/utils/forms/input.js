@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     width: "100%",
     fontFamily: "open-sans-bold",
     fontSize: 20,
-    letterSpacing: 1,
+    letterSpacing: 0,
     padding: 5,
     marginTop: 10,
     borderBottomColor: 'rgba(128,128,128,0.4)',

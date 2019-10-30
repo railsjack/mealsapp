@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Platform, View, StyleSheet, Button } from "react-native";
+import { Platform, View, StyleSheet, Button, TouchableOpacity } from "react-native";
 
 import { useDispatch } from "react-redux";
 
@@ -119,6 +119,10 @@ const LoginFormComponent = props => {
     }
   };
 
+  hideErrors = () => {
+    setFormInfo({ ...formInfo, ...{ hasErrors: false } });
+  }
+
   return (
     <View style={[styles.container, props.overrideStyle]}>
       <Input
@@ -145,11 +149,13 @@ const LoginFormComponent = props => {
         />
       )}
       {formInfo.hasErrors && (
-        <View style={styles.errorContainer}>
+        <TouchableOpacity
+          onPress={hideErrors}
+         style={styles.errorContainer}>
           <DefaultText style={styles.errorLabel}>
             Oops, check your info
           </DefaultText>
-        </View>
+        </TouchableOpacity>
       )}
       <View style={{ marginTop: 20 }}>
         <View style={styles.button}>
