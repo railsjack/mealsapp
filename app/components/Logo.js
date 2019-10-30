@@ -8,9 +8,9 @@ const LogoComponent = props => {
   return (
     <Image
       source={LogoImage}
-      resizeMode={"contain"}
+      resizeMode={"cover"}
       style={{
-        height: 120
+        width: '100%'
       }}
     />
   );

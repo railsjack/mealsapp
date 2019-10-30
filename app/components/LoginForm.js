@@ -6,10 +6,13 @@ import { useDispatch } from "react-redux";
 import Input from "../utils/forms/input";
 import ValidationRules from "../utils/forms/validationRules";
 import DefaultText from "../components/DefaultText";
-import { signUp } from "../store/actions/user_actions";
+import { signUp, signIn } from "../store/actions/user_actions";
+
+import { setTokens } from "../utils/misc";
 
 const LoginFormComponent = props => {
   state = {
+    loading: true,
     formInfo: {
       type: "Login",
       action: "Login",
@@ -75,6 +78,16 @@ const LoginFormComponent = props => {
     setForm(formCopy);
   };
 
+  manageAccess = () => {
+    if (!props.User.auth || props.User.auth.uid === false) {
+      setFormInfo({ ...formInfo, ...{ hasErrors: true } });
+    } else {
+      setTokens(props.User.auth, () => {
+        goNext();
+      });
+    }
+  };
+
   submitUser = () => {
     let formToSubmit = {};
     let isFormValid = true;
@@ -93,9 +106,16 @@ const LoginFormComponent = props => {
     if (!isFormValid) {
       setFormInfo({ ...formInfo, ...{ hasErrors: true } });
     } else {
-      dispatch(signUp(formToSubmit)).then(() => {
-        // props.User
-      });
+      if (formInfo.type === "Register") {
+        dispatch(signUp(formToSubmit)).then(() => {
+          manageAccess();
+        });
+      }
+      if (formInfo.type === "Login") {
+        dispatch(signIn(formToSubmit)).then(() => {
+          manageAccess();
+        });
+      }
     }
   };
 
@@ -106,15 +126,24 @@ const LoginFormComponent = props => {
         type={form.email.type}
         value={form.email.value}
         keyboardType={"email-address"}
-        onChangeText={value => this.updateInput("email", value)}
+        onChangeText={value => updateInput("email", value)}
       />
       <Input
         placeholder="Enter your password"
         type={form.password.type}
         value={form.password.value}
-        onChangeText={value => this.updateInput("password", value)}
+        onChangeText={value => updateInput("password", value)}
         secureTextEntry
       />
+      {formInfo.type === "Register" && (
+        <Input
+          placeholder="Enter confirm password"
+          type={form.confirmPassword.type}
+          value={form.confirmPassword.value}
+          onChangeText={value => updateInput("confirmPassword", value)}
+          secureTextEntry
+        />
+      )}
       {formInfo.hasErrors && (
         <View style={styles.errorContainer}>
           <DefaultText style={styles.errorLabel}>
@@ -122,24 +151,15 @@ const LoginFormComponent = props => {
           </DefaultText>
         </View>
       )}
-      {formInfo.type === "Register" && (
-        <Input
-          placeholder="Enter confirm password"
-          type={form.confirmPassword.type}
-          value={form.confirmPassword.value}
-          onChangeText={value => this.updateInput("confirmPassword", value)}
-          secureTextEntry
-        />
-      )}
       <View style={{ marginTop: 20 }}>
         <View style={styles.button}>
-          <Button title={formInfo.action} onPress={this.submitUser} />
+          <Button title={formInfo.action} onPress={submitUser} />
         </View>
         <View style={styles.button}>
-          <Button title={formInfo.actionMode} onPress={this.changeFormType} />
+          <Button title={formInfo.actionMode} onPress={changeFormType} />
         </View>
         <View style={styles.button}>
-          <Button title="I'll do it later" onPress={() => this.goNext()} />
+          <Button title="I'll do it later" onPress={() => goNext()} />
         </View>
       </View>
     </View>
