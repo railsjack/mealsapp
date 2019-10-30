@@ -5,7 +5,6 @@ import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createDrawerNavigator } from "react-navigation-drawer";
-import { useScreens } from "react-native-screens";
 import { Ionicons } from "@expo/vector-icons";
 
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
@@ -18,7 +17,6 @@ import FiltersScreen from "../screens/FiltersScreen";
 
 import Colors from "../constants/colors";
 
-useScreens();
 const defaultStackNavOptions = {
   headerStyle: {
     backgroundColor: Colors.primaryColor

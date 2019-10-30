@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
+import { useScreens } from "react-native-screens";
 
 // Redux part
 import { Provider } from "react-redux";
@@ -11,6 +12,7 @@ import reducers from "./app/store/reducers";
 
 import MealsNavigator from "./app/navigation/MealsNavigator";
 
+useScreens();
 const fetchFonts = () => {
   return Font.loadAsync({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
