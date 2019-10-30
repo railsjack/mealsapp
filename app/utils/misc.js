@@ -5,6 +5,7 @@ import { FIREBASE_API_KEY as API_KEY } from "../constants/keys";
 export const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
 export const SIGNIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 export const REFRESH_URL = `https://securetoken.googleapis.com/v1/token?key=${API_KEY}`;
+export const USERINFO_URL = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${API_KEY}`;
 
 const APP_NAME = "@mealsapp1";
 
@@ -24,7 +25,7 @@ export const getTokens = (cb) => {
   ]).then(values => cb(values));
 };
 
-export const removeTokens = (values, cb) => {
+export const removeTokens = (cb) => {
   AsyncStorage.multiRemove([
     `${APP_NAME}@uid`,
     `${APP_NAME}@token`,

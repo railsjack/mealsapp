@@ -1,7 +1,7 @@
 import axios from "axios";
 
-import { SIGN_UP, SIGN_IN, AUTO_SIGN_IN } from "../types";
-import { SIGNUP_URL, SIGNIN_URL, REFRESH_URL } from "../../utils/misc";
+import { SIGN_UP, SIGN_IN, AUTO_SIGN_IN, GET_USER_INFO } from "../types";
+import { SIGNUP_URL, SIGNIN_URL, REFRESH_URL, USERINFO_URL } from "../../utils/misc";
 
 export const signUp = data => {
   const request = axios({
@@ -73,6 +73,31 @@ export const autoSignIn = refToken => {
   return {
     type: AUTO_SIGN_IN,
     payload: request
+  };
+};
+
+
+
+export const getUserInfo = idToken => {
+  const request = axios({
+    method: 'POST',
+    url: USERINFO_URL,
+    data: { idToken },
+    header: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => {
+      return {
+        user_info: response.data && response.data.users && response.data.users[0]
+      };
+    })
+    .catch(e => {
+      return false;
+    });
+  return {
+    type: GET_USER_INFO,
+    payload: request,
   };
 };
 

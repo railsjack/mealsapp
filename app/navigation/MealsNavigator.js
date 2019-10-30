@@ -15,6 +15,7 @@ import MealDetailScreen from "../screens/MealDetailScreen";
 import FavoritesScreen from "../screens/FavoritesScreen";
 import FiltersScreen from "../screens/FiltersScreen";
 import LoginScreen from "../screens/LoginScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 import Colors from "../constants/colors";
 
@@ -51,6 +52,15 @@ const FavoritesNavigator = createStackNavigator(
   }
 );
 
+const ProfileNavigator = createStackNavigator(
+  {
+    Profile: ProfileScreen
+  },
+  {
+    defaultNavigationOptions: defaultStackNavOptions
+  }
+)
+
 const screenConfig = {
   Meals: {
     screen: MealsNavigator,
@@ -68,6 +78,14 @@ const screenConfig = {
     navigationOptions: {
       tabBarIcon: tabInfo => {
         return <Ionicons name="ios-star" size={25} color={tabInfo.tintColor} />;
+      }
+    }
+  },
+  Profile: {
+    screen: ProfileNavigator,
+    navigationOptions: {
+      tabBarIcon: tabInfo => {
+        return <Ionicons name="md-person" size={25} color={tabInfo.tintColor} />;
       }
     }
   }
