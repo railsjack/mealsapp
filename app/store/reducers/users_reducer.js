@@ -1,4 +1,10 @@
-import { SIGN_UP, SIGN_IN, AUTO_SIGN_IN, GET_USER_INFO } from "../types";
+import {
+  SIGN_UP,
+  SIGN_IN,
+  SIGN_OUT,
+  AUTO_SIGN_IN,
+  GET_USER_INFO
+} from "../types";
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -18,6 +24,15 @@ export default (state = {}, action) => {
           uid: action.payload.localId || false,
           token: action.payload.idToken || false,
           refToken: action.payload.refreshToken || false
+        }
+      };
+    case SIGN_OUT:
+      return {
+        ...state,
+        auth: {
+          uid: false,
+          token: false,
+          refToken: false
         }
       };
     case AUTO_SIGN_IN:

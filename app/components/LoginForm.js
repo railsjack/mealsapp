@@ -1,7 +1,13 @@
-import React, { useState } from "react";
-import { Platform, View, StyleSheet, Button, TouchableOpacity } from "react-native";
+import React, { useState, useCallback, useEffect } from "react";
+import {
+  Platform,
+  View,
+  StyleSheet,
+  Button,
+  TouchableOpacity
+} from "react-native";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Input from "../utils/forms/input";
 import ValidationRules from "../utils/forms/validationRules";
@@ -78,15 +84,13 @@ const LoginFormComponent = props => {
     setForm(formCopy);
   };
 
-  manageAccess = () => {
-    if (!props.User.auth || props.User.auth.uid === false) {
-      setFormInfo({ ...formInfo, ...{ hasErrors: true } });
-    } else {
-      setTokens(props.User.auth, () => {
+  useSelector(state => {
+    if (state.User && state.User.auth && state.User.auth.uid !== false) {
+      setTokens(state.User.auth, () => {
         goNext();
       });
     }
-  };
+  }, []);
 
   submitUser = () => {
     let formToSubmit = {};
@@ -106,14 +110,13 @@ const LoginFormComponent = props => {
     if (!isFormValid) {
       setFormInfo({ ...formInfo, ...{ hasErrors: true } });
     } else {
+      setFormInfo({ ...formInfo, ...{ hasErrors: false } });
       if (formInfo.type === "Register") {
-        dispatch(signUp(formToSubmit)).then(() => {
-          manageAccess();
-        });
+        dispatch(signUp(formToSubmit)).then(response => {});
       }
       if (formInfo.type === "Login") {
-        dispatch(signIn(formToSubmit)).then(() => {
-          manageAccess();
+        dispatch(signIn(formToSubmit)).then(response => {
+          // console.log("after login", props.User)
         });
       }
     }
@@ -121,7 +124,7 @@ const LoginFormComponent = props => {
 
   hideErrors = () => {
     setFormInfo({ ...formInfo, ...{ hasErrors: false } });
-  }
+  };
 
   return (
     <View style={[styles.container, props.overrideStyle]}>
@@ -149,9 +152,7 @@ const LoginFormComponent = props => {
         />
       )}
       {formInfo.hasErrors && (
-        <TouchableOpacity
-          onPress={hideErrors}
-         style={styles.errorContainer}>
+        <TouchableOpacity onPress={hideErrors} style={styles.errorContainer}>
           <DefaultText style={styles.errorLabel}>
             Oops, check your info
           </DefaultText>
@@ -173,8 +174,7 @@ const LoginFormComponent = props => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-  },
+  container: {},
   errorContainer: {
     marginBottom: 10,
     marginTop: 30,

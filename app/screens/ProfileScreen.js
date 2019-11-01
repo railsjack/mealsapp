@@ -11,7 +11,7 @@ import {
 import Moment from "moment";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getUserInfo } from "../store/actions/user_actions";
+import { getUserInfo, signOut } from "../store/actions/user_actions";
 import { getTokens, removeTokens } from "../utils/misc";
 
 import HeaderButton from "../components/HeaderButton";
@@ -54,6 +54,7 @@ class ProfileScreen extends Component {
     this.setState({ loading: true });
     removeTokens(() => {
       setTimeout(() => {
+        this.props.signOut();
         this.props.navigation.navigate("Auth");
       }, 1500);
     });
@@ -143,7 +144,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getUserInfo }, dispatch);
+  return bindActionCreators({ getUserInfo, signOut }, dispatch);
 }
 
 export default connect(

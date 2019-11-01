@@ -30,6 +30,6 @@ export const removeTokens = (cb) => {
     `${APP_NAME}@uid`,
     `${APP_NAME}@token`,
     `${APP_NAME}@refToken`
-  ]).then(values => cb(values));
+  ]).then(cb);
 }
 

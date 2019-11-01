@@ -1,7 +1,18 @@
 import axios from "axios";
 
-import { SIGN_UP, SIGN_IN, AUTO_SIGN_IN, GET_USER_INFO } from "../types";
-import { SIGNUP_URL, SIGNIN_URL, REFRESH_URL, USERINFO_URL } from "../../utils/misc";
+import {
+  SIGN_UP,
+  SIGN_IN,
+  SIGN_OUT,
+  AUTO_SIGN_IN,
+  GET_USER_INFO
+} from "../types";
+import {
+  SIGNUP_URL,
+  SIGNIN_URL,
+  REFRESH_URL,
+  USERINFO_URL
+} from "../../utils/misc";
 
 export const signUp = data => {
   const request = axios({
@@ -28,7 +39,6 @@ export const signUp = data => {
   };
 };
 
-
 export const signIn = data => {
   const request = axios({
     url: SIGNIN_URL,
@@ -54,7 +64,6 @@ export const signIn = data => {
   };
 };
 
-
 export const autoSignIn = refToken => {
   const request = axios({
     url: REFRESH_URL,
@@ -62,7 +71,7 @@ export const autoSignIn = refToken => {
     header: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
-    data: "grant_type=refresh_token&refresh_token="+refToken
+    data: "grant_type=refresh_token&refresh_token=" + refToken
   })
     .then(response => {
       return response.data;
@@ -76,20 +85,19 @@ export const autoSignIn = refToken => {
   };
 };
 
-
-
 export const getUserInfo = idToken => {
   const request = axios({
-    method: 'POST',
+    method: "POST",
     url: USERINFO_URL,
     data: { idToken },
     header: {
-      'Content-Type': 'application/json',
-    },
+      "Content-Type": "application/json"
+    }
   })
     .then(response => {
       return {
-        user_info: response.data && response.data.users && response.data.users[0]
+        user_info:
+          response.data && response.data.users && response.data.users[0]
       };
     })
     .catch(e => {
@@ -97,7 +105,17 @@ export const getUserInfo = idToken => {
     });
   return {
     type: GET_USER_INFO,
-    payload: request,
+    payload: request
   };
 };
 
+export const signOut = () => {
+  return {
+    type: SIGN_OUT,
+    auth: {
+      uid: null,
+      token: null,
+      refToken: null
+    }
+  };
+};

@@ -16,6 +16,7 @@ import FavoritesScreen from "../screens/FavoritesScreen";
 import FiltersScreen from "../screens/FiltersScreen";
 import LoginScreen from "../screens/LoginScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import StartupScreen from "../screens/StartupScreen";
 
 import Colors from "../constants/colors";
 
@@ -138,10 +139,11 @@ export default createAppContainer(
   createSwitchNavigator(
     {
       Auth: LoginScreen,
-      Main: MainNavigator
+      Main: MainNavigator,
+      Startup: StartupScreen
     },
     {
-      initialRouteName: "Auth"
+      initialRouteName: "Startup"
     }
   )
 );
