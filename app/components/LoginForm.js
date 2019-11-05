@@ -116,7 +116,7 @@ const LoginFormComponent = props => {
       }
       if (formInfo.type === "Login") {
         dispatch(signIn(formToSubmit)).then(response => {
-          // console.log("after login", props.User)
+          console.log("after login", response);
         });
       }
     }

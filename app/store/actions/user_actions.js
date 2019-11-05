@@ -56,6 +56,7 @@ export const signIn = data => {
       return response.data;
     })
     .catch(e => {
+      console.log("Login Error: ", e);
       return false;
     });
   return {
