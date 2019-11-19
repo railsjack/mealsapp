@@ -115,8 +115,10 @@ const LoginFormComponent = props => {
         dispatch(signUp(formToSubmit)).then(response => {});
       }
       if (formInfo.type === "Login") {
+        console.log('before =====================')
         dispatch(signIn(formToSubmit)).then(response => {
           console.log("after login", response);
+          console.log('after =====================')
         });
       }
     }
